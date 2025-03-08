@@ -1,0 +1,11 @@
+prefix=C:/PothosSDR
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: HackRF Library
+Description: C Utility Library
+Version: 0.6
+Cflags: -I${includedir} -I${includedir}/libhackrf -IC:/build/PothosSDR_vc16/Source/libusb/libusb
+Libs: -L${libdir} -lhackrf
+Libs.private: 
