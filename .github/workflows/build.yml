@@ -1,0 +1,25 @@
+on: [push]
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        # with:
+          # fetch-depth: 2
+          # submodules: true
+      - run: git submodule update --init --recursive
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+      - run: sudo apt install -y build-essential ant git libusb-1.0-0-dev libfftw3-bin libfftw3-dev mingw-w64
+      - run: javac -version
+      - run: java -version
+      - run: make
+        working-directory: src/hackrf-sweep/
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: ./src/hackrf-sweep/build
